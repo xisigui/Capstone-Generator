@@ -1,21 +1,20 @@
-from openai import OpenAI
-from pydantic import BaseModel
+from schemas import RequestData
+from ai_generate import generate_idea
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+app = FastAPI()
 
-class ResponseModel(BaseModel):
-    title: str
-    description: str
-    goals: list[str]
-
-completion = client.beta.chat.completions.parse(
-  model="llama3.1:8b",
-  messages=[
-    {"role": "system", "content": "You are a google scholar search engine. You help users generate capstone ideas."},
-    {"role": "user", "content": "generate capstone ideas with title and a short description about the idea"},
-  ],
-  response_format=ResponseModel
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-generated_result = completion.choices[0].message.parsed
-print(generated_result)
+@app.post("/generate")
+def generate(request_data: RequestData):
+    request_data = request_data.dict()    
+    return generate_idea(request_data["subject_area"], request_data["interest_area"])
+
