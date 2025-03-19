@@ -5,7 +5,7 @@ import json
 client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
 
 def read_sample_json():
-  with open("response.json", "r") as f:
+  with open("sample_response.json", "r") as f:
     data = json.load(f)
     return data
 
