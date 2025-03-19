@@ -131,7 +131,6 @@ export default function Home() {
                         <h1 className="text-3xl font-bold mb-2">
                           {capstonData.title}
                         </h1>
-                        <p className="text-gray-600 text-lg"></p>
                       </div>
                     </CardHeader>
                     <CardContent className="flex-1 overflow-hidden">
@@ -140,22 +139,22 @@ export default function Home() {
                           <h2 className="text-2xl font-bold mb-2">
                             Description
                           </h2>
-                          <p className="text-gray-600 text-lg">
+                          <p className="text-gray-600 text-lg text-justify">
                             {capstonData.description}
                           </p>
                         </div>
 
-                        <div className="flex flex-wrap justify-center mb-8">
-                          <article className="w-full md:w-1/2 lg:w-1/3 p-4 mb-4 md:mb-0">
+                        <div className="grid grid-flow-col auto-rows-max p-8 gap-7 mb-4">
+                          <div>
                             <h3 className="text-xl font-bold">Methodology</h3>
                             <ul className="list-disc ml-4 text-gray-600 text-lg">
                               {capstonData.methodology.map((item, index) => (
                                 <li key={index}>{item}</li>
                               ))}
                             </ul>
-                          </article>
+                          </div>
 
-                          <article className="w-full md:w-1/2 lg:w-1/3 p-4 mb-4 md:mb-0">
+                          <div>
                             <h3 className="text-xl font-bold">
                               Expected Outcomes
                             </h3>
@@ -166,9 +165,9 @@ export default function Home() {
                                 )
                               )}
                             </ul>
-                          </article>
+                          </div>
 
-                          <article className="w-full md:w-1/2 lg:w-1/3 p-4 mb-4 md:mb-0">
+                          <div>
                             <h3 className="text-xl font-bold">
                               Potential Impact
                             </h3>
@@ -179,7 +178,7 @@ export default function Home() {
                                 )
                               )}
                             </ul>
-                          </article>
+                          </div>
                         </div>
 
                         <div className="text-center mb-8">
