@@ -11,3 +11,6 @@ class AiResponseModel(BaseModel):
 class RequestData(BaseModel):
     subject_area: str
     interest_area: str
+    
+class Feedback(BaseModel):
+    feedback: str

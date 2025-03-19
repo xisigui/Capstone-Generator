@@ -16,7 +16,7 @@ def generate_idea(subject_area, area_of_interest):
       messages = [
       {"role": "system", "content": "You are a creative AI assistant. Your task is to generate unique, innovative, and feasible capstone project ideas based on the user's provided subject area and area of interest. The idea should be relevant to current trends and address real-world challenges."},
       {"role": "user", "content": f"I am interested in a capstone project for the subject area {subject_area} with a focus on {area_of_interest}. Can you suggest a project idea?"},
-      {"role": "system", "content": f"Your reponse should strictly follow the provided JSON format with the following details: {sample_data}. Do not include any formating styles keep everything as a normal text response like the sample data. And make sure that everything has data and the description must be atleast 2-3 sentence." }
+      {"role": "system", "content": f"Use this as an example of what the response should look like: {sample_data}. Do not include any formatting or special styles—keep everything as plain text, like the sample data. Ensure that the response contains complete data, and that the description is at least 2-3 sentences long."}
     ],
       response_format=AiResponseModel
     ) 
@@ -28,5 +28,16 @@ def generate_idea(subject_area, area_of_interest):
       
   return data 
 
+def save_response():
+  existing_data = read_sample_json()
+  
+  with open("response.json", "r") as f:
+    new_data_from_file = json.load(f)
+
+  existing_data.append(new_data_from_file)
+
+  with open("sample_response.json", "w") as f:
+    json.dump(existing_data, f, indent=2)
+      
 # generate_idea("Computer Science", "Machine Learning")
 # read_sample_json()

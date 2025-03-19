@@ -66,5 +66,26 @@
       "Enhanced Healthcare Provider Work Efficiency through Streamlined Clinical Decision-making",
       "Optimized Resource Allocation by 30% through real-time insights and Predictive Analytics"
     ]
+  },
+  {
+    "title": "AI-Powered Predictive Maintenance of Hotel Assets",
+    "description": "The project aims to develop an AI-powered predictive maintenance system that leverages machine learning algorithms and IoT sensor data to identify potential breakdowns in hotel assets, such as HVAC systems, elevators, or electrical equipment. By analyzing patterns in maintenance history, temperature fluctuations, and other environmental factors, the system can predict when maintenance is required, minimizing downtime and optimizing resource allocation. This project combines cutting-edge data analytics and IoT technologies with hospitality management best practices to create a comprehensive solution for hotels seeking to enhance their operational efficiency and reduce costs.",
+    "summary": "This AI-powered predictive maintenance system helps hotels reduce unnecessary maintenance visits and minimize asset downtime, ultimately leading to cost savings and improved guest satisfaction.",
+    "expected_outcome": [
+      "Improved Maintenance Scheduling",
+      "Reduced Downtime of Assets",
+      "Enhanced Guest Experience through Minimized Disruptions"
+    ],
+    "methodology": [
+      "IoT Sensor Data Collection and Integration",
+      "Machine Learning Algorithm Development for Predictive Modeling",
+      "Data Analytics and Visualization for Asset Performance Monitoring",
+      "Collaboration with Hotel Staff to Validate AI-driven Predictions and Ensure Effective Implementation"
+    ],
+    "potential_impact": [
+      "Enhanced Operational Efficiency through Optimized Resource Allocation",
+      "Cost Savings through Reduced Unnecessary Maintenance Visits",
+      "Improved Guest Satisfaction through Minimized Disruptions"
+    ]
   }
 ]

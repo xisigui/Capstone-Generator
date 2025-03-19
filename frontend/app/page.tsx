@@ -27,6 +27,7 @@ export default function Home() {
     e.preventDefault();
     try {
       setIsLoading(true);
+      setFeedbackGiven(false);
       const res = await fetch("http://localhost:8000/generate", {
         method: "POST",
         headers: {
@@ -48,6 +49,26 @@ export default function Home() {
       console.log(error.message);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const [feedbackGiven, setFeedbackGiven] = useState(false);
+  const handleFeedback = async (e) => {
+    e.preventDefault();
+
+    const feedback = e.target.value;
+    try {
+      const res = await fetch("http://localhost:8000/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feedback }),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit feedback");
+      const data = await res.json();
+      setFeedbackGiven(true);
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -170,12 +191,34 @@ export default function Home() {
                       </ScrollArea>
                     </CardContent>
                     <CardFooter>
-                      <Button variant="outline" size="icon" className="mr-2">
-                        <ThumbsUp />
-                      </Button>
-                      <Button variant="outline" size="icon">
-                        <ThumbsDown />
-                      </Button>
+                      {!feedbackGiven ? (
+                        <>
+                          <p className="mr-2 text-gray-600">
+                            Is this idea helpful?{" "}
+                          </p>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="mr-2"
+                            onClick={handleFeedback}
+                            value="helpful"
+                          >
+                            <ThumbsUp />
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={handleFeedback}
+                            value="notHelpful"
+                          >
+                            <ThumbsDown />
+                          </Button>
+                        </>
+                      ) : (
+                        <p className="text-gray-600">
+                          Thanks for the feedback!
+                        </p>
+                      )}
                     </CardFooter>
                   </>
                 )
