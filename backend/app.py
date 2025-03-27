@@ -1,15 +1,28 @@
-from openai import OpenAI
+from schemas import RequestData, Feedback
+from ai_generate import generate_idea, save_response
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
-client = OpenAI(
-  api_key=""
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-completion = client.chat.completions.create(
-  model="gpt-4o-mini",
-  store=True,
-  messages=[
-    {"role": "user", "content": "what color is the sky?"},
-  ]
-)
+@app.post("/generate")
+def generate(request_data: RequestData):
+    request_data = request_data.dict()    
+    return generate_idea(request_data["subject_area"], request_data["interest_area"])
 
-print(completion.choices[0].message)
+@app.post("/feedback")
+def idea_helpfull(feedback: Feedback):
+    if feedback.feedback not in ["helpful", "notHelpful"]:
+        raise HTTPException(status_code=400, detail="Invalid feedback value")
+    if feedback.feedback == "helpful":
+        save_response()
+    return {"message": "Thanks for the feedback!"}
