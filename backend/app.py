@@ -1,5 +1,5 @@
 from schemas import RequestData, Feedback
-from ai_generate import generate_idea, save_response
+from ai_generate import save_response, genai_generate
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -16,8 +16,8 @@ app.add_middleware(
 
 @app.post("/generate")
 def generate(request_data: RequestData):
-    request_data = request_data.dict()    
-    return generate_idea(request_data["subject_area"], request_data["interest_area"])
+    request_data = request_data.dict()
+    return genai_generate(request_data["subject_area"], request_data["interest_area"])
 
 @app.post("/feedback")
 def idea_helpfull(feedback: Feedback):
