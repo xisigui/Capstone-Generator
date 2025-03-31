@@ -13,10 +13,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { dotStream } from "ldrs";
+import { DotStream } from "ldrs/react";
+import "ldrs/react/DotStream.css";
 
 export default function Home() {
-  dotStream.register();
   const [subjectArea, setSubjectArea] = useState("");
   const [interestArea, setInterestArea] = useState("");
 
@@ -45,8 +45,8 @@ export default function Home() {
 
       const data = await res.json();
       setCapstoneData(data);
-    } catch (error) {
-      console.log(error.message);
+    } catch (error: unknown) {
+      console.error((error as Error).message);
     } finally {
       setIsLoading(false);
     }
@@ -65,10 +65,9 @@ export default function Home() {
       });
 
       if (!res.ok) throw new Error("Failed to submit feedback");
-      const data = await res.json();
       setFeedbackGiven(true);
-    } catch (error) {
-      console.error(error.message);
+    } catch (error: unknown) {
+      console.error((error as Error).message);
     }
   };
 
@@ -117,11 +116,7 @@ export default function Home() {
               {isLoading || capstonData ? (
                 isLoading ? (
                   <div className="flex flex-col items-center justify-center h-full">
-                    <l-dot-stream
-                      size="60"
-                      speed="2.5"
-                      color="black"
-                    ></l-dot-stream>
+                    <DotStream size="60" speed="2.5" color="black" />
                     <p>Generating Idea</p>
                   </div>
                 ) : (
