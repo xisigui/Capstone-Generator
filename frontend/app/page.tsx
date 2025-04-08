@@ -17,6 +17,7 @@ import { DotStream } from "ldrs/react";
 import "ldrs/react/DotStream.css";
 
 export default function Home() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const [subjectArea, setSubjectArea] = useState("");
   const [interestArea, setInterestArea] = useState("");
 
@@ -28,7 +29,7 @@ export default function Home() {
     try {
       setIsLoading(true);
       setFeedbackGiven(false);
-      const res = await fetch("http://localhost:8000/generate", {
+      const res = await fetch(`${baseUrl}/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +59,7 @@ export default function Home() {
 
     const feedback = e.target.value;
     try {
-      const res = await fetch("http://localhost:8000/feedback", {
+      const res = await fetch(`${baseUrl}/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ feedback }),
