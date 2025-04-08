@@ -17,7 +17,7 @@ import { DotStream } from "ldrs/react";
 import "ldrs/react/DotStream.css";
 
 export default function Home() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const [subjectArea, setSubjectArea] = useState("");
   const [interestArea, setInterestArea] = useState("");
 
